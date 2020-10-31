@@ -1,7 +1,5 @@
 const c = document.getElementById('canvas');
 const ctx = c.getContext('2d');
-// const colorInput = document.getElementById('color');
-// console.log(colorInput.value)
 
 // Randomly generate lines of various color
     // make a function that picks a color
@@ -29,33 +27,32 @@ const setColor = () => Math.floor(Math.random()*16777215).toString(16);
 
 // draw a straight line of random width and length
 const straightLine = () => {
-    const [width, height] = randomLocation()
-    ctx.beginPath()
+    const [width, height] = randomLocation();
+    ctx.beginPath();
     ctx.moveTo(width, height);
     ctx.lineTo(width * Math.random(), height * Math.random());
-    ctx.lineWidth = Math.floor(Math.random() * 10)
+    ctx.lineWidth = Math.floor(Math.random() * 10);
     ctx.strokeStyle = `#${setColor()}`;
-    ctx.stroke()
-}
+    ctx.stroke();
+};
 
 const curvedLine = () => {
-    let randomArc = () => Math.floor(Math.random() * 360)
-    console.log(randomArc())
-    ctx.beginPath()
-    ctx.arc(randomArc(), randomArc(), randomArc(), randomArc(), Math.PI, false)
+    let randomArc = () => Math.floor(Math.random() * 360);
+    console.log(randomArc());
+    ctx.beginPath();
+    ctx.arc(randomArc(), randomArc(), randomArc(), randomArc(), Math.PI, false);
     ctx.lineWidth = Math.floor(Math.random() * 10)
     ctx.strokeStyle = `#${setColor()}`;
-    ctx.stroke()
+    ctx.stroke();
 
-}
+};
 
-const straight = setInterval(straightLine, 100)
-const curved = setInterval(curvedLine, 100)
+const straight = setInterval(straightLine, 100);
+const curved = setInterval(curvedLine, 100);
 
 const end = () => {
-    clearInterval(straight)
-    clearInterval(curved)
-}
+    clearInterval(straight);
+    clearInterval(curved);
+};
 
-setTimeout(end, 120000)
-
+setTimeout(end, 120000);
