@@ -1,0 +1,10 @@
+#canvas {
+    height: 95vh;
+    width: 99vw;
+    border: 1px solid black;
+}
+
+footer {
+    float: right;
+    margin-right: 50%;
+}
