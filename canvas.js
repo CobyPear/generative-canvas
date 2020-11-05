@@ -55,22 +55,36 @@ const multiLine = () => {
     ctx.lineTo((width * Math.random()), (height * Math.random()));
     ctx.lineTo((width * Math.random()), (height * Math.random()));
     ctx.lineTo((width * Math.random()), (height * Math.random()));
-    ctx.lineTo(width, height);
+    ctx.closePath()
+
 
     ctx.lineWidth = Math.floor(Math.random() * 10)
     ctx.strokeStyle = `#${setColor()}`;
     ctx.stroke();
 }
 
+const dot = () => {
+    console.log("test")
+    const [width, height] = randomLocation()
+    ctx.beginPath()
+    ctx.arc(width, height, 3, 0, Math.PI * 2, true)
+
+    ctx.fillStyle = `#${setColor()}`;
+    ctx.fill();
+}
+
 
 const straight = setInterval(straightLine, 200);
 const curved = setInterval(curvedLine, 200);
 const multi = setInterval(multiLine, 200)
+const makeDot = setInterval(dot, 100)
 
 const end = () => {
     clearInterval(straight);
     clearInterval(curved);
     clearInterval(multi)
+    clearInterval(makeDot)
+    
 };
 
 setTimeout(end, 120000);
