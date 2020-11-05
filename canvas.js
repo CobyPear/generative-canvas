@@ -2,15 +2,14 @@ const c = document.getElementById('canvas');
 const ctx = c.getContext('2d');
 
 // Randomly generate lines of various color
-    // make a function that picks a color
-    // make a function that draws a straight line of random width and length
-    // make a function that draws a curved line of random width and length
+// make a function that picks a color
+// make a function that draws a straight line of random width and length
+// make a function that draws a curved line of random width and length
 
 // get random location on canvas
 const randomLocation = () => {
-    const style = getComputedStyle(c);
-    let height = parseFloat(style.height);
-    let width = parseFloat(style.width);
+    const height = window.innerHeight
+    const width = window.innerWidth
 
     let randomHeight = Math.random() * height;
     let randomWidth = Math.random() * width;
@@ -22,23 +21,24 @@ const randomLocation = () => {
 }
 
 //choose random color
-    // https://css-tricks.com/snippets/javascript/random-hex-color/
-const setColor = () => Math.floor(Math.random()*16777215).toString(16);
+// https://css-tricks.com/snippets/javascript/random-hex-color/
+const setColor = () => Math.floor(Math.random() * 16777215).toString(16);
 
 // draw a straight line of random width and length
 const straightLine = () => {
     const [width, height] = randomLocation();
     ctx.beginPath();
     ctx.moveTo(width, height);
-    ctx.lineTo(width * Math.random(), height * Math.random());
+    ctx.lineTo((width * Math.random()), (height * Math.random()));
     ctx.lineWidth = Math.floor(Math.random() * 10);
     ctx.strokeStyle = `#${setColor()}`;
     ctx.stroke();
 };
 
 const curvedLine = () => {
+    const [width, height] = randomLocation();
+    // console.log(width, height)
     let randomArc = () => Math.floor(Math.random() * 360);
-    console.log(randomArc());
     ctx.beginPath();
     ctx.arc(randomArc(), randomArc(), randomArc(), randomArc(), Math.PI, false);
     ctx.lineWidth = Math.floor(Math.random() * 10)
@@ -47,12 +47,30 @@ const curvedLine = () => {
 
 };
 
-const straight = setInterval(straightLine, 100);
-const curved = setInterval(curvedLine, 100);
+const multiLine = () => {
+    const [width, height] = randomLocation()
+    ctx.moveTo(width, height);
+    ctx.beginPath()
+    ctx.lineTo((width * Math.random()), (height * Math.random()));
+    ctx.lineTo((width * Math.random()), (height * Math.random()));
+    ctx.lineTo((width * Math.random()), (height * Math.random()));
+    ctx.lineTo((width * Math.random()), (height * Math.random()));
+    ctx.lineTo(width, height);
+
+    ctx.lineWidth = Math.floor(Math.random() * 10)
+    ctx.strokeStyle = `#${setColor()}`;
+    ctx.stroke();
+}
+
+
+const straight = setInterval(straightLine, 200);
+const curved = setInterval(curvedLine, 200);
+const multi = setInterval(multiLine, 200)
 
 const end = () => {
     clearInterval(straight);
     clearInterval(curved);
+    clearInterval(multi)
 };
 
 setTimeout(end, 120000);
